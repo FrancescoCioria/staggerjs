@@ -6,9 +6,16 @@ const Settings = t.interface({
   maxOngoingMethods: t.Integer
 }, { strict: true });
 
+const defaultSettings = {
+  perSecond: 20,
+  maxOngoingMethods: 5
+};
+
 export default (_methods, _settings) => {
   const methods = Methods(_methods);
-  const { maxOngoingMethods, perSecond } = Settings(_settings);
+  const settings = Settings({ ...defaultSettings, ..._settings });
+
+  const { maxOngoingMethods, perSecond } = settings;
 
   return new Promise((resolve) => {
     const minTimeBetweenMethods = 1000 / perSecond;
