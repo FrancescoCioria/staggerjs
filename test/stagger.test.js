@@ -5,9 +5,9 @@ jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000; // eslint-disable-line no-undef
 describe('staggerjs', () => {
 
   it('perSecond', async () => {
-    const fakeMethod = () => Promise.resolve(Date.now());
+    const fakeMethod = async () => Date.now();
     const methods = [...Array(10).keys()].map(() => fakeMethod);
-    const perSecond = 1;
+    const perSecond = 2;
 
     const res = await stagger(methods, { perSecond, maxOngoingMethods: 1 });
     const diff = res.slice(1, res.length).map((x, i) => x - res[i]);
