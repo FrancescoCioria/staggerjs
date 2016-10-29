@@ -1,10 +1,12 @@
 import t from 'tcomb';
 import _throttle from 'throttle-function';
 
+const InfinityType = t.irreducible('InfinityType', x => typeof x === 'number' && x === Infinity);
+
 const Methods = t.list(t.Function);
 const Settings = t.interface({
-  perSecond: t.Integer,
-  maxOngoingMethods: t.Integer
+  perSecond: t.union([t.Integer, InfinityType]),
+  maxOngoingMethods: t.union([t.Integer, InfinityType])
 }, { strict: true });
 
 const defaultSettings = {
