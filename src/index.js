@@ -20,7 +20,10 @@ export default (_methods, _settings) => {
 
   const { maxOngoingMethods, perSecond } = settings;
 
-  const throttle = _throttle(method => method(), 1000 / perSecond);
+  const throttle = _throttle(method => method(), {
+    window: 1, // window is in seconds
+    limit: perSecond
+  });
 
   return new Promise((resolve) => {
     const queue = [];
