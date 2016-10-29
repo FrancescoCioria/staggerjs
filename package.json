@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/FrancescoCioria/staggerjs#readme",
   "dependencies": {
-    "tcomb": "^3"
+    "tcomb": "^3",
+    "throttle-function": "^0.1.0"
   },
   "devDependencies": {
     "babel-cli": "^6",
