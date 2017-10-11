@@ -5,7 +5,7 @@ const InfinityType = t.irreducible('InfinityType', x => typeof x === 'number' &&
 
 const Methods = t.list(t.Function);
 const Settings = t.interface({
-  perSecond: t.union([t.Integer, InfinityType]),
+  perSecond: t.union([t.Number, InfinityType]),
   maxOngoingMethods: t.union([t.Integer, InfinityType])
 }, { strict: true });
 

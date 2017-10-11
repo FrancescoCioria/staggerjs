@@ -1,6 +1,6 @@
 import stagger from '../src';
 
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000; // eslint-disable-line no-undef
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000; // eslint-disable-line no-undef
 
 describe('staggerjs', () => {
 
@@ -9,6 +9,23 @@ describe('staggerjs', () => {
 
   it('perSecond', async () => {
     const perSecond = 2;
+
+    const fakeMethod = async () => Date.now();
+    const methods = [...Array(10).keys()].map(() => fakeMethod);
+
+    const res = await stagger(methods, { perSecond, maxOngoingMethods: 1 });
+    const diff = res.slice(1, res.length).map((x, i) => x - res[i]);
+
+    const failed = diff.filter(d => Math.abs((1000 / perSecond) - d) > marginOfErrorTimeout);
+    if (failed.length > 0) {
+      throw new Error(`FAILED diff ${failed.length} times`);
+    }
+
+    return true;
+  });
+
+  it('perSecond fraction', async () => {
+    const perSecond = 0.5;
 
     const fakeMethod = async () => Date.now();
     const methods = [...Array(10).keys()].map(() => fakeMethod);
