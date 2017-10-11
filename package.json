@@ -1,6 +1,6 @@
 {
   "name": "staggerjs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Light utility to stagger a stack of async methods",
   "main": "lib",
   "scripts": {
